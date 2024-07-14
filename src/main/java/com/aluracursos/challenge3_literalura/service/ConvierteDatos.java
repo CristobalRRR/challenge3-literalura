@@ -3,6 +3,7 @@ package com.aluracursos.challenge3_literalura.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+//Uso de jackson y la interfaz para realizar la conversion de los datos
 public class ConvierteDatos implements IConvierteDatos{
     private ObjectMapper mapper = new ObjectMapper();
 

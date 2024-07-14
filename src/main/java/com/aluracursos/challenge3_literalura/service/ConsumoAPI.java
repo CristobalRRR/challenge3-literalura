@@ -6,10 +6,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-/*
-La API es Gutendex para obtener la info de los libros
-para obtener resultados el path es /books
- */
+
+//Escribir la forma en que se consumira la API para llamar a esta funcion solamente
 public class ConsumoAPI {
     public String obtenerDatos(String url){
         HttpClient client = HttpClient.newHttpClient();
