@@ -6,6 +6,7 @@ import com.aluracursos.challenge3_literalura.repository.LibroRepository;
 import com.aluracursos.challenge3_literalura.service.ConsumoAPI;
 import com.aluracursos.challenge3_literalura.service.ConvierteDatos;
 
+import java.util.List;
 import java.util.Scanner;
 
 //Clase principal, aqui hacemos todas las opciones para que interactue el usuario
@@ -29,10 +30,16 @@ public class Principal {
     }
     //Mostrar el menu
     private String menu = """
+            -----------------------------------------
             1. Buscar un libro por su titulo
+            2. Listar los libros ya buscados
+            3. Lista de autores registrados
+            4. Lista de autores vivos en cierto año
+            5. Listar libros en un idioma especifico
             
             9. Salir
             Por favor escoja una opcion
+            -----------------------------------------
             """;
 
     public void interaccionUsuario(){
@@ -46,14 +53,26 @@ public class Principal {
                 case 1:
                     buscarLibrosPorTitulo();
                     break;
+                case 2:
+                    mostrarLibrosBuscados();
+                    break;
+                case 3:
+                    verAutores();
+                    break;
+                case 4:
+                    verAutoresVivosEnCiertaFecha();
+                    break;
+                case 5:
+                    mostrarLibrosEnIdiomaEspecifico();
+                    break;
                 case 9:
                     System.out.println("Gracias por su preferencia");
                     break;
+                default:
+                    System.out.println("Opcion no valida");
             }
         }
     }
-
-
 
     private void buscarLibrosPorTitulo(){
         Datos datos = convertir.obtenerDatos(encontrarLibro(), Datos.class);
@@ -82,4 +101,41 @@ public class Principal {
         return json;
     }
 
+    public void mostrarLibrosBuscados(){
+        List<Libro> librosBuscados = libroRepository.findAll();
+        librosBuscados.stream().forEach(l -> System.out.println(l.toString())); //Usamos el toString personalizado de la clase Libro
+    }
+
+    private void verAutores() {
+        List<Autor> autoresRegistrados = autorRepository.findAll();
+        autoresRegistrados.stream().forEach(a -> System.out.println(a.toString()));
+    }
+
+    private void verAutoresVivosEnCiertaFecha(){
+        System.out.println("Ingrese el año que desea buscar");
+        var fecha = teclado.nextInt();
+        List<Autor> autoresVivos = autorRepository.autoresVivosEntreFechas(fecha);
+        autoresVivos.stream().forEach(a -> System.out.println(a.toString()));
+    }
+
+    private void mostrarLibrosEnIdiomaEspecifico(){
+        System.out.println("""
+                Ingrese el numero del idioma que desea buscar:
+                1. Español
+                2. Ingles
+                """);
+        var opcionIdioma = teclado.nextInt();
+        switch (opcionIdioma) {
+            case 1:
+                List<Libro> librosEs = libroRepository.findByIdioma("es");
+                librosEs.stream().forEach(l -> System.out.println(l.toString()));
+                break;
+            case 2:
+                List<Libro> librosEn = libroRepository.findByIdioma("en");
+                librosEn.stream().forEach(l -> System.out.println(l.toString()));
+                break;
+            default:
+                System.out.println("Opcion no valida");
+        }
+    }
 }

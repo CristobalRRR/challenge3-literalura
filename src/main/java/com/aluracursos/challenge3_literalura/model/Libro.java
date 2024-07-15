@@ -41,10 +41,12 @@ public class Libro {
     //Darle formato al toString al devolver libro
     @Override
     public String toString(){
-        String libro = "\nTitulo: \n" + this.titulo +
-                "\nAutor: \n" + this.autor.getNombre() +
-                "\nIdioma: \n" + this.idioma +
-                "\nDescargas: \n" + this.numeroDescargas;
+        String libro ="\n**********************" +
+                "\nTitulo: " + this.titulo +
+                "\nAutor: " + this.autor.getNombre() +
+                "\nIdioma: " + this.idioma +
+                "\nDescargas: " + this.numeroDescargas +
+                "\n**********************\n";
         return libro;
     }
 

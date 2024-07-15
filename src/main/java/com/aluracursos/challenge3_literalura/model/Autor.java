@@ -33,7 +33,19 @@ public class Autor {
         this.fechaFallecimiento = datosAutor.fechaFallecimiento();
     }
 
-    //Getters y Setters
+    @Override
+    //toString personalizado para mostrar datos del autor
+    public String toString() {
+        String autor = "\n**********************" +
+                "\nNombre: " + this.nombre +
+                "\nFecha de nacimiento: " + this.fechaNacimiento +
+                "\nFecha de fallecimiento: " + this.fechaFallecimiento +
+                "\n**********************\n";
+        return autor;
+    }
+
+
+        //Getters y Setters
     public String getNombre() {
         return nombre;
     }

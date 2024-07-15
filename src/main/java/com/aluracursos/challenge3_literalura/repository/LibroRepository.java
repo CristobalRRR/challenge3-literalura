@@ -11,7 +11,6 @@ import java.util.Optional;
 //JPA repository maneja las solicitudes CRUD de los libros
 public interface LibroRepository extends JpaRepository<Libro, Long> {
     Optional<Libro> findByTitulo(String titulo);
-    Optional<Libro> findByAutor(Autor autor);
 
     @Query("SELECT i FROM Libro i WHERE i.idioma=:idioma")
     List<Libro> findByIdioma(String idioma);
